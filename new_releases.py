@@ -12,10 +12,23 @@ token = util.prompt_for_user_token(username,
                            redirect_uri='https://google.com/')
 
 
+# if token:
+#     sp = spotipy.Spotify(auth=token)
+#     new_releases = sp.new_releases()
+#     for item in new_releases['albums']['items']:
+#         pprint.pprint(item['artists'][0]['name'])  # prints out all the artist names one by one
+#         pprint.pprint(item['name'])  # prints out all the artist title song/album names one by one
+#         pprint.pprint(item['type'])  # prints out all the artist title song/album names one by one
+#         print()
+#
+# else:
+#     print("Can't get token for", username)
+
 if token:
     sp = spotipy.Spotify(auth=token)
     new_releases = sp.new_releases()
-    pprint.pprint(new_releases)
+    for item in new_releases['albums']['items']:
+        pprint.pprint(item)
 
 else:
     print("Can't get token for", username)
