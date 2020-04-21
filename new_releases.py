@@ -10,7 +10,6 @@ token = util.prompt_for_user_token(username,
                            client_secret='b8091c597d894f4cb563ff833e007c17',
                            redirect_uri='https://google.com/')
 
-
 # if token:
 #     sp = spotipy.Spotify(auth=token)
 #     new_releases = sp.new_releases()
@@ -23,60 +22,17 @@ token = util.prompt_for_user_token(username,
 # else:
 #     print("Can't get token for", username)
 
-
-# TODO New Releases
-# if token:
-#     sp = spotipy.Spotify(auth=token)
-#     new_releases = sp.new_releases()
-#     for item in new_releases['albums']['items']:
-#         pprint.pprint(item)
-#
-# else:
-#     print("Can't get token for", username)
-
-
 # TODO: Get artist URI/detail
 if token:
     sp = spotipy.Spotify(auth=token)
-    # nameOfArtist = 'Craig Xen'
-    # search_artist = sp.search(nameOfArtist, type='artist')
-    # pprint.pprint(artist)  # prints out artist Drake details (shows multiple Drakes)
-    # pprint.pprint(artist['artists']['items'][0]['uri'])  # gets URI of first item (the one we want)
-    # artist_uri = search_artist['artists']['items'][0]['uri']  # artist URI of first item (the one we want)
-    # artist = sp.artist(artist_uri)  # obtained Artist through URI
-    # artist_catalog = sp.artist_albums(artist_uri)
-    # pprint.pprint(artist_catalog['items'][0]['release_date'])  # gets first item's release date info
-    # pprint.pprint(artist_catalog)  # gets first item's release date info
 
-    # TODO Gets Album name and Release Date, finds latest release, outputs the latest Album name
-    # date_dict = {}  # Key: Release Date, Value: Album Name
-    # date_list = []
-    # for item in artist_catalog['items']:
-    #     date_list.append(item['release_date'])
-    #     date_dict[item['release_date']] = item['name']
-    #
-    # print()
-    #
-    # max_date = max(date_list)
-    # print(date_dict.get(max_date))  # Outputs latest Album Name from dict
-
-
-    # TODO Trying out couple artists [WORKS]
+    # TODO [WORKS] Gets Album name and Release Date, finds latest release, outputs the latest Album name
     master_dict = {}
     artist_list = ['Craig Xen', 'Pouya', 'Playboy Carti', 'Lil Skies']
-    # search_artist = sp.search(artist_list, type='artist')
-    search_artist = sp.search('Craig Xen', type='artist')  # TESTING one artist: Craig Xen
-    artist_uri = search_artist['artists']['items'][0]['uri']
-    artist_catalog = sp.artist_albums(artist_uri)
-
-    date_list = []  # To be used to determine latest date (latest song released)
-    artist_dict = {}  # Key: Release Date, Value: Album Name
-
-    # item['artists'][0]['name']    //artist name
 
     for artist in artist_list:
         artist_dict = {}  # Key: Release Date, Value: Album Name
-        date_list = []
+        date_list = []  # To be used to determine latest date (latest song released)
         artist_details = []
         search_artist = sp.search(artist, type='artist')
         artist_uri = search_artist['artists']['items'][0]['uri']  # Obtain artist URI number
@@ -96,7 +52,6 @@ if token:
     for x, y in master_dict.items():
         print(x, y)
         print()
-
 
 else:
     print("Can't get token for", username)
