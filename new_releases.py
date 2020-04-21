@@ -2,7 +2,6 @@ import spotipy
 import spotipy.util as util
 import pprint
 
-
 username = '1223672875'
 scope = 'user-read-private user-read-playback-state user-modify-playback-state'
 token = util.prompt_for_user_token(username,
@@ -48,21 +47,18 @@ if token:
     artist_catalog = sp.artist_albums(artist_uri)
     # pprint.pprint(artist_catalog['items'][0]['release_date'])  # gets first item's release date info
     # pprint.pprint(artist_catalog)  # gets first item's release date info
+
+    # TODO Gets Album name and Release Date, finds latest release, outputs the latest Album name
+    date_dict = {}
+    date_list = []
     for item in artist_catalog['items']:
-        pprint.pprint(item['name'])
-        pprint.pprint(item['release_date'])
-        print()
-    # pprint.pprint(artist)
+        date_list.append(item['release_date'])
+        date_dict[item['release_date']] = item['name']
 
-    # test = sp.artist(artist_uri)
-    # pprint.pprint(test)
+    print()
 
+    max_date = max(date_list)
+    print(date_dict.get(max_date))
 
-
-    # for item in search_artist['artists']['items']:  # Test print: prints out all the artists search query
-    #     # pprint.pprint(item)
-    #     pprint.pprint(item['name'])
-    #     pprint.pprint(item['uri'])
-    #     print()
 else:
     print("Can't get token for", username)
