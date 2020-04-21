@@ -25,7 +25,7 @@ token = util.prompt_for_user_token(username,
 #     print("Can't get token for", username)
 
 
-# testing
+# TODO New Releases
 # if token:
 #     sp = spotipy.Spotify(auth=token)
 #     new_releases = sp.new_releases()
@@ -39,15 +39,25 @@ token = util.prompt_for_user_token(username,
 # TODO: Get artist URI/detail
 if token:
     sp = spotipy.Spotify(auth=token)
-    nameOfArtist = 'Drake'
+    nameOfArtist = 'Craig Xen'
     search_artist = sp.search(nameOfArtist, type='artist')
     # pprint.pprint(artist)  # prints out artist Drake details (shows multiple Drakes)
     # pprint.pprint(artist['artists']['items'][0]['uri'])  # gets URI of first item (the one we want)
     artist_uri = search_artist['artists']['items'][0]['uri']  # artist URI of first item (the one we want)
     # artist = sp.artist(artist_uri)  # obtained Artist through URI
     artist_catalog = sp.artist_albums(artist_uri)
-    pprint.pprint(artist_catalog)
+    # pprint.pprint(artist_catalog['items'][0]['release_date'])  # gets first item's release date info
+    # pprint.pprint(artist_catalog)  # gets first item's release date info
+    for item in artist_catalog['items']:
+        pprint.pprint(item['name'])
+        pprint.pprint(item['release_date'])
+        print()
     # pprint.pprint(artist)
+
+    # test = sp.artist(artist_uri)
+    # pprint.pprint(test)
+
+
 
     # for item in search_artist['artists']['items']:  # Test print: prints out all the artists search query
     #     # pprint.pprint(item)
